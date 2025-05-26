@@ -2,7 +2,6 @@ from flask import render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 from app.db.models import Product, Cartitem, User
 from . import main
-# from app.forms import RegistrationForm, LoginForm, ProductForm
 
 
 @main.route('/')
