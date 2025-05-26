@@ -26,3 +26,4 @@ def cart():
 @login_required
 def add_to_cart(product_id):
     pass
+

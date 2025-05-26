@@ -1,12 +1,12 @@
 from flask import render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from db import models, db, User
 from . import auth
 from forms import RegistrationForm, LoginForm
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = Flask(__name__)
@@ -76,3 +76,11 @@ def register():
 def logiut():
     logout_user
     return redirect(url_for('auth.login'))
+
+
+
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html', name=current_user.username)
