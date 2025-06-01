@@ -1,6 +1,7 @@
 from flask import Flask
+
 from app.db import db_object as db
-from app.db import models
+from app.admin import init_admin
 from app.auth.routes import login_manager
 from config import SQLALCHEMY_DATABASE_URI
 
@@ -16,6 +17,8 @@ def create_app():
     
     with app.app_context():
         db.create_all()
+
+    init_admin(app)
 
     from .main import main as main_bp
     from .auth import auth as auth_bp
