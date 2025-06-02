@@ -1,0 +1,20 @@
+{% macro render_pagination(pagination, endpoint) %}
+  <div class="page-items">
+    {{ pagination.first }} - {{ pagination.last }} из {{ pagination.total }}
+  </div>
+  <div class="pagination">
+    <ul class="pagination">
+      {% for page in pagination.iter_pages() %}
+        {% if page %}
+          {% if page != pagination.page %}
+            <li class="page-item"><a class="page-link" href="{{ url_for(endpoint, page=page) }}">{{ page }}</a></li>
+          {% else %}
+            <li class="page-item active"><a class="page-link" href="#">{{ page }}</a></li>
+          {% endif %}
+        {% else %}
+          <li class="page-item"><span class="page-link">…</span></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}

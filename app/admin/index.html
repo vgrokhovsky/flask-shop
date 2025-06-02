@@ -1,5 +1,26 @@
-{% extends 'admin/master.html' %}
-
-{% block body %}
-  <p>Hello world</p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Постраничный просмотр</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">Список элементов</h1>
+        <ul class="list-group">
+            {% for item in items %}
+                <li class="list-group-item">{{ item.name }}</li>
+            {% endfor %}
+        </ul>
+        
+        <!-- Вызов макроса пагинации -->
+        {% if pagination.total > 0 %}
+            {% import 'pagination.html' as pagination_macro %}
+            {{ pagination_macro.render_pagination(pagination, 'items') }}
+        {% else %}
+            <p>Нет элементов для отображения.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

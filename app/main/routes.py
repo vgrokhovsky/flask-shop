@@ -26,3 +26,4 @@ def cart():
 def add_to_cart(product_id):
     pass
 
+@app.before_first_request

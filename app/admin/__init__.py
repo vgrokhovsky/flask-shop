@@ -11,4 +11,22 @@ def init_admin(app):
     admin.add_view(ModelView(User, db.session))
     admin.add_view(ModelView(Product, db.session))
 
+class Item(db.Model):
+    id=db.Colimn(db.integer,primary_key=True)
+    name=db.Column(db.Sting)
+
+@app.before_first_request
+def create_data():
+     db.session.add_all([Item(name=f'Item {i}') for i in range(1, 101)])
+     db.session.commit()
+
+
+@app.route('/items', methods=['GET'])
+def items():
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page')
+    total = Item.query.count()
+    items = Item.query.limit(per_page).offset(offset).all()
+    pagination = Pagination(page=page, total=total, record_name='items', per_page=per_page)
+
+    return render_template('index.html', items=items, pagination=pagination)
 
