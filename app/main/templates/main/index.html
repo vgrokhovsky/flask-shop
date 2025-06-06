@@ -11,5 +11,24 @@
         <a href="{{url_for('main.product', product_id=product.id)}}">View</a>
     </div>
     {% endfor %}
+
+
+    <div class="page-items">
+        {{ pagination.first }} - {{ pagination.last }} из {{ pagination.total }}
+    </div>
+    <div class="pagination">
+        {% for page in pagination.iter_pages() %}
+        {% if page %}
+        {% if page != pagination.page %}
+        <a class="page-link" href="{{ url_for('main.index', page=page) }}">{{ page }}</a>
+        {% else %}
+        <a class="page-link" href="#">{{ page }}</a>
+        {% endif %}
+        {% else %}
+        <span class="page-link">…</span>
+        {% endif %}
+        {% endfor %}
+    </div>
+
 </div>
 {% endblock%}
