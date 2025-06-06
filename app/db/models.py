@@ -30,3 +30,6 @@ class Cartitem(db.Model):
     quantity = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey("product.id"), nullable=False)
+
+    user = db.relationship('User', backref='cart_items')
+    product = db.relationship('Item', backref='cart_items')
