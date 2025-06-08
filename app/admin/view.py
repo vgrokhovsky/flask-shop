@@ -1,8 +1,7 @@
 from flask_admin.contrib.sqla import ModelView
 
-from db.models import User, Product
+from app.db.models import User, Product
+
 
 class UserAdmin(ModelView):
-    column_list = ('username', 'email', 'password')
-
-
+    column_list = ("username", "email", "password")
