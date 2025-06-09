@@ -1,0 +1,33 @@
+body {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    /* Переход от одного цвета к другому слева направо */
+}
+
+header {
+    display: flex; /* Включаем Flexbox для header */
+    justify-content: space-between; /* Раздвигаем элементы */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    padding: 20px 40px; /* Внутренние отступы для удобства */
+    background-color: #ffffff; /* Фоновый цвет заголовка */
+}
+
+.header-title {
+    flex-grow: 2; /* Позволяет заголовку занимать доступное пространство */
+    text-align: center; /* Центрирует текст заголовка */
+    color: rgb(0, 0, 0);
+}
+
+nav {
+    display: flex; /* Включаем Flexbox для навигации */
+    gap: 15px; /* Отступ между ссылками */
+}
+
+nav a {
+    text-decoration: none; /* Убираем подчеркивание у ссылок */
+    color: #007bff; /* Цвет текста ссылок */
+    transition: color 0.3s; /* Плавный переход цвета при наведении */
+}
+
+nav a:hover {
+    color: #0056b3; /* Цвет текста при наведении */
+}
