@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
 
 
-{%block content%}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <title>{% block title %}Register{% endblock %}</title>
+</head>
 <h2>Register</h2>
-<form method="POST">
-    {{form.hidden_tag()}}<br>
-    {{form.username.label}} {{form.username()}}<br>
-    {{form.email.label}} {{form.email()}}<br>
-    {{form.password.label}} {{form.password()}}<br>
-    {{form.confirm_password.label}} {{form.confirm_password()}}<br>
-    {{form.submit()}}
-</form>
-{%endblock%}
+<div class="form-container">
+    <form method="POST">
+        {{ form.hidden_tag() }}<br>
+        <div class="form-group">
+            {{ form.username.label }} {{ form.username() }}<br>
+        </div>
+        <div class="form-group">
+            {{ form.email.label }} {{ form.email() }}<br>
+        </div>
+        <div class="form-group">
+            {{ form.password.label }} {{ form.password() }}<br>
+        </div>
+        <div class="form-group">
+            {{ form.confirm_password.label }} {{ form.confirm_password() }}<br>
+        </div>
+        <div class="form-group">
+            {{ form.submit() }}
+        </div>
+    </form>
+</div>
+{% endblock %}
