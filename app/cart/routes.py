@@ -5,7 +5,7 @@ from . import cart
 from app.db.models import Product, Cartitem
 
 
-@cart.route("/")
+@cart.route("/cart")
 @login_required
 def cart_view():
     cart_items = Cartitem.query.filter_by(user_id=current_user.id).all()
@@ -30,7 +30,7 @@ def add_to_cart(product_id):
         )
         db.session.add(new_cart_item)
     db.session.commit()
-    return redirect("main.cart")
+    return redirect("index") # !!
 
 
 # Удаление товара из корзины

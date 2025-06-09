@@ -12,4 +12,4 @@ def create_user(username, email, password):
     db.session.commit()
 
 def get_user(email):
-    return User.query.get_or_404(email)
+    return User.query.filter_by(email=email).first()

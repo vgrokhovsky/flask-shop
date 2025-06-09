@@ -20,14 +20,20 @@ header {
 .header-title {
     flex-grow: 2;
     /* Позволяет заголовку занимать доступное пространство */
-    text-align: left;
+    text-align: center;
     /* Центрирует текст заголовка */
     color: rgb(0, 0, 0);
+}
+
+.header-logo {
+    min-width: 20%;
 }
 
 nav {
     display: flex;
     /* Включаем Flexbox для навигации */
+    min-width: 20%;
+    justify-content: flex-end;
     gap: 15px;
     /* Отступ между ссылками */
 }
@@ -45,4 +51,3 @@ nav a:hover {
     color: #0056b3;
     /* Цвет текста при наведении */
 }
-

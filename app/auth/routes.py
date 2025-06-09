@@ -1,4 +1,4 @@
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from . import auth
 from app.db.db_func import create_user, get_user
@@ -29,10 +29,18 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        print('validate_on_submit')
+        print('form.email.data', form.email.data)
         user = get_user(email=form.email.data)
-        if check_password_hash(user.password, form.password.data):
-            login_user(user)
-            return redirect(url_for("main.index"))
+        print(user.password, form.password.data)
+        # if check_password_hash(user.password, form.password.data):
+        if user.password == form.password.data:
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            if next_page:
+                return redirect('next_page')
+            else:
+                return redirect('index')
         else:
             flash(
                 "Login Unsuccessful. Please check email and password", category="danger"
@@ -54,4 +62,4 @@ def logout():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return User.query.get(user_id)
