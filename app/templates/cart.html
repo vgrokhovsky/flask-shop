@@ -1,11 +1,31 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% block content %}
 
-{%block content%}
-<h2>Yoyr Cart</h2>
-<ul>
-    {%for item in cart_items%}
-    <li>{{item.product.name}}-Quantity:{{item.quantity}}</li>
-    {%endfor%}
-</ul>
-
-{%endblock%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+    <div class="cart-container">
+        <h2>Корзина покупок</h2>
+        {% if cart_items %}
+        <ul class="cart-items">
+            {% for item in cart_items %}
+            <li>
+                <span>{{ item.product.name }}</span>
+                <span>Цена: {{ item.product.price }} руб.</span>
+                <span>Количество: {{ item.quantity }}</span>
+                <form method="POST" action="{{ url_for('cart.remove_item', item_id=item.id) }}">
+                    <button type="submit" class="remove-button">Удалить</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="total-summary">
+            <strong>Итого:</strong>
+            <span>{{ cart_items|map(attribute='product.price')|sum }} руб.</span>
+        </div>
+        {% else %}
+        <p>Ваша корзина пуста.</p>
+        {% endif %}
+    </div>
+    {% endblock %}

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from app import db
 from . import cart
@@ -16,6 +16,7 @@ def cart_view():
 @login_required
 def add_to_cart(product_id):
     quantity = int(request.form.get("quantity", 1))
+    product=Product.query.get_or_404(product_id)
 
     product = Product.query.get_or_404(product_id)
 
@@ -30,7 +31,8 @@ def add_to_cart(product_id):
         )
         db.session.add(new_cart_item)
     db.session.commit()
-    return redirect("index") # !!
+    flash("Товар добавлен в корзину!")
+    return redirect("new_cart_item") # !!
 
 
 # Удаление товара из корзины

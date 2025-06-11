@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app.db.models import User
 
 login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
+login_manager.login_view = "auth.login"
 
 
 @auth.route("/register", methods=["GET", "POST"])
@@ -29,18 +29,18 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        print('validate_on_submit')
-        print('form.email.data', form.email.data)
+        print("validate_on_submit")
+        print("form.email.data", form.email.data)
         user = get_user(email=form.email.data)
         print(user.password, form.password.data)
         # if check_password_hash(user.password, form.password.data):
         if user.password == form.password.data:
             login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
+            next_page = request.args.get("next")
             if next_page:
-                return redirect('next_page')
+                return redirect("next_page")
             else:
-                return redirect('index')
+                return redirect(url_for("main.index"))
         else:
             flash(
                 "Login Unsuccessful. Please check email and password", category="danger"
@@ -59,6 +59,7 @@ def logout():
 # @login_required
 # def profile():
 #     return render_template('profile.html', name=current_user.username)
+
 
 @login_manager.user_loader
 def load_user(user_id):
