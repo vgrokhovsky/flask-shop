@@ -12,3 +12,9 @@ def index():
     pagination = Product.query.paginate(page=page, per_page=per_page, error_out=False)
     products = pagination.items
     return render_template("main/index.html", products=products, pagination=pagination)
+
+@main.route("/account")
+@login_required
+def dashboard():
+    products = current_user.products  # Получаем продукты, связанные с текущим пользователем
+    return render_template("account.html", products=products)

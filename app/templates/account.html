@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+
+    {% block content %}
+    <div class="account-container">
+        <h1>Личный Кабинет {{ current_user.username }}</h1>
+        <div class="product-list">
+            <h2>Ваши продукты</h2>
+            {% if products %}
+            <ul>
+                {% for product in products %}
+                <li class="product-item">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>У вас еще нет продуктов.</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}

@@ -11,6 +11,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, unique=True, nullable=False)
     cart_items = db.relationship("Cartitem", back_populates="user", lazy=True)
 
+    products = db.relationship('Product', backref='user', lazy=True)
 
 class Product(db.Model):
     __tablename__ = "product"
@@ -22,6 +23,7 @@ class Product(db.Model):
     stock = db.Column(db.String, nullable=False)
     image_path = db.Column(db.String, nullable=False)
 
+    user = db.relationship('User', backref='products')
     cart_items = db.relationship("Cartitem", back_populates="product")
 
 
