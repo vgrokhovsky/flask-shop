@@ -53,6 +53,8 @@ nav a:hover {
 }
 
 .header-logo img {
-    max-width: 100px; /* Ширина изображения */
-    height: auto; /* Высота по пропорциям */
+    max-width: 100px;
+    /* Ширина изображения */
+    height: auto;
+    /* Высота по пропорциям */
 }
