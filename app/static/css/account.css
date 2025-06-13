@@ -1,39 +1,87 @@
-.accaunt-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Светлый фон для страницы */
 }
 
-h1 {
-    text-align: center;
-    color: #333;
+/* Стили для верхней панели с кнопками */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #007BFF; /* Цвет фона панели */
+    padding: 15px; /* Отступы */
+    display: flex;
+    justify-content: flex-end; /* Кнопки выравнены вправо */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тень */
+    z-index: 1000; /* На переднем плане */
+}
+
+.header-button {
+    margin-left: 20px; /* Отступы между кнопками */
+    padding: 12px 20px; /* Размер кнопок */
+    font-size: 16px; /* Размер текста */
+    color: #ffffff; /* Цвет текста */
+    background-color: #28a745; /* Цвет фона кнопки */
+    border: none; /* Без границы */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Курсор при наведении */
+    transition: background-color 0.3s; /* Плавный переход при наведении */
+}
+
+.header-button:hover {
+    background-color: #218838; /* Цвет кнопки при наведении */
+}
+
+/* Стили для контейнера личного кабинета */
+.account-container {
+    margin-top: 80px; /* Отступ сверху для учета фиксированной панели */
+    padding: 20px; /* Отступы контейнера */
+    background-color: #ffffff; /* Белый фон контейнера */
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Тень */
+    max-width: 800px; /* Максимальная ширина */
+    margin-left: auto; /* Центрирование контейнера */
+    margin-right: auto; /* Центрирование контейнера */
+}
+
+/* Стили для заголовков */
+.account-container h1 {
+    color: #333; /* Цвет заголовка */
+    font-size: 24px; /* Размер заголовка */
+    border-bottom: 2px solid #007BFF; /* Нижняя граница под заголовком */
+    padding-bottom: 10px; /* Отступ снизу */
 }
 
 .product-list {
-    margin-top: 20px;
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.product-list h2 {
+    font-size: 20px; /* Размер подзаголовка */
+    color: #555; /* Цвет подзаголовка */
 }
 
 .product-item {
-    border: 1px solid #ddd;
     padding: 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    background-color: #fff;
-    transition: box-shadow 0.3s;
+    margin: 10px 0; /* Отступ между элементами списка */
+    background-color: #f9f9f9; /* Цвет фона продукта */
+    border: 1px solid #ddd; /* Граница продукта */
+    border-radius: 5px; /* Скругленные углы */
+    transition: box-shadow 0.2s; /* Плавный переход при наведении */
 }
 
 .product-item:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Тень при наведении */
 }
 
 .product-item h3 {
-    margin: 0 0 10px;
-    color: #007BFF; /* Цвет заголовка */
+    margin: 0; /* Убираем отступы */
+    color: #333; /* Цвет названия продукта */
 }
 
 .product-item p {
-    color: #666;
+    color: #666; /* Цвет текста описания */
+    font-size: 14px; /* Размер текста описания */
 }
