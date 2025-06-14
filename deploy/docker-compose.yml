@@ -1,0 +1,26 @@
+services:
+  web:
+    build:
+      context: ../
+      dockerfile: deploy/app/Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "${FLASK_PORTS}:5000"
+    depends_on:
+      - db
+    restart: always
+  
+  db:
+    image: mariadb:latest
+    env_file:
+      - .env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "${MARIADB_PORT}:3306"
+    restart: always
+
+volumes:
+  mariadb_data:
+

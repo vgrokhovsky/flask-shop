@@ -7,9 +7,9 @@ class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String, unique=True, nullable=False)
-    email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, unique=True, nullable=False)
+    username = db.Column(db.String(255), unique=True, nullable=False)
+    email = db.Column(db.String(255), unique=True, nullable=False)
+    password = db.Column(db.String(64), unique=True, nullable=False)
     cart_items = db.relationship("Cartitem", back_populates="user", lazy=True)
 
     products = db.relationship("Product", backref="user", lazy=True)
@@ -19,16 +19,15 @@ class Product(db.Model):
     __tablename__ = "product"
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    stock = db.Column(db.String, nullable=False)
-    image_path = db.Column(db.String, nullable=False)
+    stock = db.Column(db.String(255), nullable=False)
+    image_path = db.Column(db.String(255), nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     cart_items = db.relationship("Cartitem", back_populates="product")
-   
 
 
 class Cartitem(db.Model):

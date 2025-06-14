@@ -13,8 +13,12 @@ header {
     /* Выравнивание по центру по вертикали */
     padding: 20px 40px;
     /* Внутренние отступы для удобства */
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     /* Фоновый цвет заголовка */
+    background-image:
+        url('/static/images/logo.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .header-title {
