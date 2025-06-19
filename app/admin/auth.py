@@ -2,7 +2,8 @@ from flask_login import current_user
 from flask_admin.contrib.sqla import ModelView
 from admin import admin
 from db.models import User,Product
-
+from flask import redirect, url_for, request
+from app.db import db_object as db
 
 class SecuredModelView(ModelView):
     def is_accessible(self):
