@@ -8,6 +8,7 @@ from app.auth.routes import login_manager
 import os
 
 
+
 def create_app():
     app = Flask(__name__)
     app.config["SQLALCHEMY_DATABASE_URI"] = (
