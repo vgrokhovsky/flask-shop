@@ -1,13 +1,14 @@
 from flask_login import UserMixin
 from . import db_object as db
 
+
 class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), unique=True, nullable=False)
     email = db.Column(db.String(255), unique=True, nullable=False)
-    password = db.Column(db.String(64), nullable=False)  
+    password = db.Column(db.String(64), nullable=False)
     cart_items = db.relationship("Cartitem", back_populates="user", lazy=True)
 
     products = db.relationship("Product", backref="user", lazy=True)
@@ -20,7 +21,7 @@ class Product(db.Model):
     name = db.Column(db.String(255), nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    stock = db.Column(db.String(255), nullable=False)
+    stock = db.Column(db.Integer, nullable=False)
     image_path = db.Column(db.String(255), nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
