@@ -1,8 +1,11 @@
 from flask import Flask
+from flask_migrate import Migrate
+
 
 from app.db import db_object as db
 from app.admin import init_admin
 from app.auth.routes import login_manager
+from flask_migrate import Migrate
 
 
 import os
@@ -21,10 +24,14 @@ def create_app():
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 
     db.init_app(app)
-    login_manager.init_app(app)
+    migrate = Migrate(app, db)
 
-    with app.app_context():
-        db.create_all()
+    login_manager.init_app(app)
+    
+    
+
+    #with app.app_context():
+        #db.create_all()
 
     init_admin(app)
 

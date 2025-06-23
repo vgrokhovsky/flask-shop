@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать категорию</title>
+</head>
+<body>
+    <h1>Создать категорию</h1>
+    <form action="{{ url_for('add_category') }}" method="POST">
+        <label for="name">Имя категории:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description"></textarea><br>
+
+        <input type="submit" value="Создать">
+    </form>
+</body>
+</html>
