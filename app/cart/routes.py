@@ -3,12 +3,13 @@ from flask_login import login_required, current_user
 from app import db
 from . import cart
 from app.db.models import Product, Cartitem
+from app.db.db_func import get_product_by_id, get_cart_items
 
 
 @cart.route("/cart")
 @login_required
 def cart_view():
-    cart_items = Cartitem.query.filter_by(user_id=current_user.id).all()
+    cart_items = get_cart_items(user_id=current_user.id)
     return render_template("cart.html", cart_items=cart_items)
 
 
@@ -16,10 +17,7 @@ def cart_view():
 @login_required
 def add_to_cart(product_id):
     quantity = int(request.form.get("quantity", 1))
-    product=Product.query.get_or_404(product_id)
-
-    product = Product.query.get_or_404(product_id)
-
+    product = get_product_by_id(product_id)
     product_in_cart = Cartitem.query.filter_by(
         user_id=current_user.id, product_id=product.id
     ).first()
@@ -32,7 +30,7 @@ def add_to_cart(product_id):
         db.session.add(new_cart_item)
     db.session.commit()
     flash("Товар добавлен в корзину!")
-    return redirect("new_cart_item") # !!
+    return redirect("new_cart_item")  # !!
 
 
 # Удаление товара из корзины

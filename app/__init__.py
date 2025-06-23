@@ -5,11 +5,9 @@ from flask_migrate import Migrate
 from app.db import db_object as db
 from app.admin import init_admin
 from app.auth.routes import login_manager
-from flask_migrate import Migrate
 
 
 import os
-
 
 
 def create_app():
@@ -27,11 +25,9 @@ def create_app():
     migrate = Migrate(app, db)
 
     login_manager.init_app(app)
-    
-    
 
-    #with app.app_context():
-        #db.create_all()
+    # with app.app_context():
+    # db.create_all()
 
     init_admin(app)
 

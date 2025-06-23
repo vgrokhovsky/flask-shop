@@ -21,4 +21,10 @@ ENV FLASK_RUN_PORT=5000
 
 EXPOSE 5000
 
+RUN wait-for-it.sh db:3306 --timeout=30 --strict
+
+RUN flask db init
+RUN flask db migrate -m "Initial migration."
+RUN flask db upgrade
+
 CMD ["flask", "run"]
