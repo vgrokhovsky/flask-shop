@@ -26,6 +26,7 @@ class Product(db.Model):
     image_path = db.Column(db.String(255), nullable=False)
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
 
     cart_items = db.relationship("Cartitem", back_populates="product")
 
@@ -43,7 +44,7 @@ class Cartitem(db.Model):
 
 
 class Category(db.Model):
-    __tablename__='category'
+    __tablename__ = "category"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True, nullable=False)
@@ -51,10 +52,9 @@ class Category(db.Model):
 
     products = db.relationship("Product", backref="category", lazy=True)
 
- 
+
 class Order(db.Model):
     __tablename__ = "order"
-
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
@@ -63,6 +63,7 @@ class Order(db.Model):
 
     user = db.relationship("User", back_populates="orders")
     order_items = db.relationship("OrderItem", back_populates="order")
+
 
 class OrderItem(db.Model):
     __tablename__ = "order_item"
@@ -74,7 +75,8 @@ class OrderItem(db.Model):
     price = db.Column(db.Float, nullable=False)
 
     order = db.relationship("Order", back_populates="order_items")
-    product = db.relationship("Product")   
+    product = db.relationship("Product")
+
 
 class Wishlist(db.Model):
     __tablename__ = "wishlist"
@@ -85,5 +87,6 @@ class Wishlist(db.Model):
 
     user = db.relationship("User", back_populates="wishlists")
     product = db.relationship("Product")
+
 
 User.wishlists = db.relationship("Wishlist", back_populates="user")
