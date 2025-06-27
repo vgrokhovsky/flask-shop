@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="wishlist-container">
+    <h2>Список желаемого</h2>
+    {% if wishlist_items %}
+    <ul class="wishlist-items">
+        {% for item in wishlist_items %}
+        <li>
+            <span>{{ item.product.name }}</span>
+            <span>Цена: {{ item.product.price }} руб.</span>
+            <form method="POST" action="{{ url_for('wishlist.remove_from_wishlist_route', item_id=item.id) }}" style="display:inline;">
+                <button type="submit" class="remove-button">Удалить</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Ваш список желаемого пуст.</p>
+    {% endif %}
+</div>
+
+</div>
+{% endblock %}
