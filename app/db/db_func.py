@@ -89,8 +89,6 @@ def get_all_products():
     return Product.query.all()
 
 
-
-
 def create_order(user_id, status):
     """Создать новый заказ"""
     order = Order(user_id=user_id, status=status)

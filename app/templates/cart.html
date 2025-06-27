@@ -37,7 +37,7 @@
 <h3>Добавить новый товар</h3>
 <form method="POST" action="{{ url_for('cart.add_to_cart') }}">
     <select name="product_id" required>
-        {% for product in products %} 
+        {% for product in products %}
         <option value="{{ product.id }}">{{ product.name }} - {{ product.price }} руб.</option>
         {% endfor %}
     </select>

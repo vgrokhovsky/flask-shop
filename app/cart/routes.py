@@ -16,9 +16,12 @@ from app.db.db_func import get_product_by_id
 def cart_view():
     cart_items = get_cart_items(current_user.id)
     total = get_cart_total(current_user.id)
-    products = Product.query.all()
+    # total = 0
+    # for cart_item in cart_items:
+    #     total += cart_item.quantity * cart_item.product.price
+
     return render_template(
-        "cart.html", cart_items=cart_items, products=products, total=total
+        "cart.html", cart_items=cart_items, products=cart_items, total=total
     )
 
 

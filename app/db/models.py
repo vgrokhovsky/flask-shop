@@ -25,7 +25,6 @@ class Product(db.Model):
     stock = db.Column(db.Integer, nullable=False)
     image_path = db.Column(db.String(255), nullable=False)
 
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
 
     cart_items = db.relationship("Cartitem", back_populates="product")

@@ -22,6 +22,7 @@ COPY deploy/app/wait-for-it.sh /app/wait-for-it.sh
 RUN sed -i 's/\r$//' /app/wait-for-it.sh && \
     chmod +x /app/wait-for-it.sh
 
+COPY migrations /app/migrations
 
 
 ENV FLASK_APP=run.py
