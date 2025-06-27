@@ -1,30 +1,34 @@
-
-FROM python:3.13-slim
+FROM python:3.12-slim
 
 RUN apt-get update && apt-get install -y \
     libmariadb-dev \
-    build-essential # gcc
-
+    build-essential  
 WORKDIR /app
 
 COPY deploy/app/requirements.txt /app/requirements.txt
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app /app/app
 COPY run.py /app/run.py
 
+# Для start.sh
+COPY start.sh /app/start.sh
+RUN sed -i 's/\r$//' /app/start.sh && \
+    chmod +x /app/start.sh
 
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
+# Для wait-for-it.sh
+COPY deploy/app/wait-for-it.sh /app/wait-for-it.sh
+RUN sed -i 's/\r$//' /app/wait-for-it.sh && \
+    chmod +x /app/wait-for-it.sh
 
+
+
+
+ENV FLASK_APP=run.py
+ENV FLASK_ENV=production
 
 EXPOSE 5000
 
-RUN wait-for-it.sh db:3306 --timeout=30 --strict
-
-RUN flask db init
-RUN flask db migrate -m "Initial migration."
-RUN flask db upgrade
-
-CMD ["flask", "run"]
+# Запуск через start.sh
+CMD ["./start.sh"]
