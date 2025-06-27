@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Детали заказа #{{ order.id }}</h2>
+<ul>
+    {% for item in items %}
+    <li>
+        {{ item.product.name }} - {{ item.quantity }} шт. по {{ item.price }} руб.
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

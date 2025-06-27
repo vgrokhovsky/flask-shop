@@ -89,25 +89,6 @@ def get_all_products():
     return Product.query.all()
 
 
-def add_to_cart(user_id, product_id, quantity):
-    """Добавить продукт в корзину"""
-    cart_item = Cartitem(user_id=user_id, product_id=product_id, quantity=quantity)
-    db.session.add(cart_item)
-    db.session.commit()
-    return cart_item
-
-
-def get_cart_items(user_id):
-    """Получить все продукты в корзине пользователя"""
-    return Cartitem.query.filter_by(user_id=user_id).all()
-
-
-def remove_from_cart(cart_item_id):
-    """Удалить продукт из корзины"""
-    cart_item = Cartitem.query.get(cart_item_id)
-    if cart_item:
-        db.session.delete(cart_item)
-        db.session.commit()
 
 
 def create_order(user_id, status):
