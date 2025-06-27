@@ -24,7 +24,6 @@ RUN sed -i 's/\r$//' /app/wait-for-it.sh && \
 
 
 
-
 ENV FLASK_APP=run.py
 ENV FLASK_ENV=production
 

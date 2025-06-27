@@ -3,9 +3,12 @@ from flask_login import login_required, current_user
 from app import db
 from . import cart
 from app.db.models import Product, Cartitem
-from app.db.db_func_cart import  get_cart_items,update_cart_item_quantity,get_cart_total
+from app.db.db_func_cart import (
+    get_cart_items,
+    update_cart_item_quantity,
+    get_cart_total,
+)
 from app.db.db_func import get_product_by_id
-
 
 
 @cart.route("/cart", methods=["GET"])
@@ -13,8 +16,10 @@ from app.db.db_func import get_product_by_id
 def cart_view():
     cart_items = get_cart_items(current_user.id)
     total = get_cart_total(current_user.id)
-    products = Product.query.all()  
-    return render_template("cart.html", cart_items=cart_items, products=products, total=total)
+    products = Product.query.all()
+    return render_template(
+        "cart.html", cart_items=cart_items, products=products, total=total
+    )
 
 
 @cart.route("/add_to_cart/<int:product_id>", methods=["POST"])
@@ -48,30 +53,19 @@ def remove_item(item_id):
     return redirect(url_for("cart.cart_view"))
 
 
-
 # Обновление количества в корзине
 @cart.route("/update_cart/<int:cart_item_id>", methods=["POST"])
 @login_required
 def update_cart(cart_item_id):
-    new_quantity = int(request.form.get("quantity", 1)) 
-    update_cart_item_quantity(cart_item_id, new_quantity)  
-    flash("Количество товара обновлено!")  
-    return redirect(url_for("cart.cart_view")) 
+    new_quantity = int(request.form.get("quantity", 1))
+    update_cart_item_quantity(cart_item_id, new_quantity)
+    flash("Количество товара обновлено!")
+    return redirect(url_for("cart.cart_view"))
 
 
-#получения общей стоимости в корзине
+# получения общей стоимости в корзине
 @cart.route("/cart_total", methods=["GET"])
 @login_required
 def cart_total():
-    total = get_cart_total(current_user.id)  
-    return render_template("cart_total.html", total=total) 
-
-@cart.route("/view_cart", methods=["GET"])
-@login_required
-def cart_view():
-    cart_items = get_cart_items(current_user.id)
     total = get_cart_total(current_user.id)
-    products = Product.query.all()  
-    return render_template("cart.html", cart_items=cart_items, products=products, total=total)
-
-
+    return render_template("cart_total.html", total=total)
